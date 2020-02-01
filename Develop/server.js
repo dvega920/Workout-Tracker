@@ -17,7 +17,8 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populate", {
+
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout_db", {
     useNewUrlParser: true,
     useUnifiedTopology: true 
 })
@@ -25,7 +26,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populate", {
         console.log(`Successfully connected to ${databaseName}`);
     });
 
-//insert routes here.
+app.use(require("./routes/api-routes.js"))
+app.use(require("./routes/html-routes.js"))
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}!`);
